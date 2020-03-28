@@ -1,0 +1,31 @@
+- name: check up exists
+  command: up
+  register: up_command_exists
+  ignore_errors: true
+
+- name: Create tmp directory
+  file:
+    name: /home/{{username}}/tmp
+    state: directory
+
+- name: unarchive up
+  get_url:
+    url: https://github.com/akavel/up/releases/download/v0.3/up
+    dest: /home/{{username}}/tmp
+  when: up_command_exists is failed
+  ignore_errors: true
+
+- name: install up
+  become: true
+  copy:
+    src: /home/{{username}}/tmp/up
+    dest: /usr/bin/up
+    mode: 0640
+  when: up_command_exists is failed
+  ignore_errors: true
+
+- name: cleanup
+  file:
+    name: /home/{{username}}/tmp/up
+    state: absent
+  ignore_errors: true

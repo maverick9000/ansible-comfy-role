@@ -1,0 +1,112 @@
+- name: update cache
+  shell: apt-get update
+  become: yes
+  ignore_errors: true
+
+- name: install file
+  apt:
+    name: file
+  become: true
+  ignore_errors: true
+
+- name: install tree
+  apt:
+    name: tree
+  become: true
+  ignore_errors: true
+
+- name: install unzip
+  apt:
+    name: unzip
+  become: true
+  ignore_errors: true
+
+- name: install ncdu
+  apt:
+    name: ncdu
+  become: true
+  ignore_errors: true
+
+- name: install htop
+  apt:
+    name: htop
+  become: true
+  ignore_errors: true
+
+- name: install lnav
+  apt:
+    name: lnav
+  become: true
+  ignore_errors: true
+
+- name: install caca-utils
+  apt:
+    name: caca-utils
+  become: true
+  ignore_errors: true
+
+- name: install pgcli
+  apt:
+    name: pgcli
+  become: true
+  ignore_errors: true
+
+- name: install mycli
+  apt:
+    name: mycli
+  become: true
+  ignore_errors: true
+
+- name: install mytop
+  apt:
+    name: mytop
+  become: true
+  ignore_errors: true
+
+- name: install yank
+  apt:
+    name: yank
+  become: true
+  ignore_errors: true
+
+- name: install tig
+  apt:
+    name: tig
+  become: true
+  ignore_errors: true
+
+- name: install pick
+  apt:
+    name: pick
+  become: true
+  ignore_errors: true
+
+- name: install hwinfo # info on disk/cpu/mem
+  apt:
+    name: hwinfo
+  become: true
+  ignore_errors: true
+
+- name: install telnet
+  apt:
+    name: telnet
+  become: true
+  ignore_errors: true
+
+- name: install python-setuptools
+  apt:
+    name: python-setuptools
+  become: true
+  ignore_errors: true
+
+- name: install python3-setuptools
+  apt:
+    name: python3-setuptools
+  become: true
+  ignore_errors: true
+
+- name: install python-pip
+  apt:
+    name: python-pip
+  become: true
+  ignore_errors: true

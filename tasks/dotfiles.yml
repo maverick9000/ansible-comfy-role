@@ -1,0 +1,42 @@
+- name: Create .config directory
+  file:
+    name: /home/{{username}}/.config
+    state: directory
+  tags:
+    - update
+
+- name: make sure .config owned by {{username}}
+  file:
+    dest: /home/{{username}}/.config
+    recurse: false
+    owner: "{{username}}"
+    group: "{{username}}"
+    mode: 0775
+  become: yes
+  tags:
+    - update
+
+- name: remove old dot files
+  file:
+    state: absent
+    path: /home/{{username}}/.config/{{item}}
+  loop:
+    - dot
+    - dotfiles.vim
+    - dotfiles.tmux
+    - dotfiles.zsh
+    - dotfiles.powerline
+  ignore_errors: yes
+  tags:
+    - update
+
+- name: clone dotfiles
+  git:
+    repo: 'https://github.com/maverick9000/dot.public.git'
+    dest: /home/{{username}}/.config/dot
+    depth: 1
+    accept_hostkey: yes
+    force: yes
+    update: yes
+  tags:
+    - update

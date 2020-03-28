@@ -1,0 +1,25 @@
+- name: Install tmux
+  apt:
+    name: tmux
+    state: present
+    update_cache: false
+  become: yes
+
+- name: trash dotfiles.tmux if exists
+  file:
+    name: /home/{{username}}/.config/dotfiles.tmux
+    state: absent
+
+- name: backup existing tmux configuration
+  shell: "mv ~/.{{item}} ~/.{{item}}.bak"
+  loop:
+    - tmux.conf
+  ignore_errors: true
+
+- name: symlink config rc files
+  file:
+    src: /home/{{username}}/.config/dot/tmux/{{item}}
+    dest: /home/{{username}}/.{{item}}
+    state: link
+  loop:
+    - tmux.conf

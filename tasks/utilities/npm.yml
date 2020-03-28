@@ -1,0 +1,51 @@
+- name: install aptitude
+  apt:
+    name: aptitude
+    state: present
+    update_cache: false
+  become: true
+
+- name: check npm installed
+  stat:
+    path: /usr/bin/npm
+  register: npm_exec
+
+- name: add 10.x repo
+  shell: curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
+  become: true
+
+- name: install nodejs
+  shell: aptitude install -ry nodejs
+  become: true
+
+- name: install npm
+  shell: aptitude install -ry npm
+  become: true
+
+- name: install gtop
+  npm:
+    name: gtop
+    global: yes
+  become: true
+  ignore_errors: true
+
+- name: install tldr
+  npm:
+    name: tldr
+    global: yes
+  become: true
+  ignore_errors: true
+
+- name: install diff-so-fancy
+  npm:
+    name: diff-so-fancy
+    global: yes
+  become: true
+  ignore_errors: true
+
+- name: install whereami
+  npm:
+    name: "@rafaelrinaldi/whereami"
+    global: yes
+  become: true
+  ignore_errors: true

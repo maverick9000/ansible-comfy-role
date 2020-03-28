@@ -1,0 +1,18 @@
+- name: install ripgrep
+  shell: cargo install ripgrep
+  ignore_errors: true
+
+- name: install exa prerequisites
+  apt: name={{item}}
+  loop:
+    - cmake
+  become: yes
+  ignore_errors: true
+
+- name: install exa
+  shell: cargo install exa
+  ignore_errors: true
+
+- name: install fd-find
+  shell: cargo install fd-find
+  ignore_errors: true

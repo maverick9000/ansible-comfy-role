@@ -1,0 +1,44 @@
+- name: Setup ssh forward
+  template:
+    src: "../files/zsh/rc"
+    dest: /home/{{username}}/.ssh/rc
+    owner: "{{username}}"
+    group: "{{username}}"
+
+- name: install zsh from apt
+  apt:
+    name: zsh
+    state: latest
+    update_cache: false
+  become: true
+
+- name: trash dotfiles.zsh if exists
+  file:
+    name: /home/{{username}}/.config/dotfiles.zsh
+    state: absent
+  ignore_errors: true
+
+- name: backup existing zsh configuration
+  shell: "mv ~/.{{item}} ~/.{{item}}.bak"
+  loop:
+    - zshrc
+    - zsh
+  ignore_errors: true
+
+- name: symlink config file
+  file:
+    src: /home/{{username}}/.config/dot/zsh/zshrc
+    dest: /home/{{username}}/.zshrc
+    state: link
+
+- name: symlink config directory
+  file:
+    src: /home/{{username}}/.config/dot/zsh/zsh
+    dest: /home/{{username}}/.zsh
+    state: link
+
+- name: Set zsh as default shell
+  user:
+    name: "{{username}}"
+    shell: /bin/zsh
+  become: true

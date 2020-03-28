@@ -1,0 +1,26 @@
+- name: add rust repository
+  apt_repository:
+    repo: 'ppa:jonathonf/rustlang'
+    state: present
+  register: apt_result
+  until: apt_result is success
+  retries: 3
+  delay: 1
+  ignore_errors: yes
+  become: yes
+
+- name: update cache
+  shell: apt-get update
+  become: yes
+
+- name: install rust
+  apt:
+    name: rustc
+    state: latest
+  become: yes
+
+- name: install cargo
+  apt:
+    name: cargo
+    state: latest
+  become: yes

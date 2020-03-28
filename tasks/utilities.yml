@@ -1,0 +1,7 @@
+- include: "utilities/apt.yml"
+- include: "utilities/fzf.yml"
+- include: "utilities/npm.yml"
+- include: "utilities/pip.yml"
+- include: "utilities/scripts.yml"
+- include: "utilities/rust_apt.yml"
+- include: "utilities/cargo.yml"

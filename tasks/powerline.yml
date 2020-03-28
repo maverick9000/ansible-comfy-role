@@ -1,0 +1,76 @@
+- name: install pip
+  apt:
+    pkg: python-pip
+    state: latest
+  become: yes
+
+- name: pip install powerline-status
+  pip:
+    name: "{{item}}"
+    extra_args: --upgrade
+  loop:
+    - powerline-status
+  become: yes
+
+- name: backup existing powerline configuration
+  shell: "mv {{item}} {{item}}.bak"
+  loop:
+    - /home/{{username}}/.config/powerline
+  ignore_errors: true
+
+- name: trash dotfiles.powerline if exists
+  file:
+    name: /home/{{username}}/.config/dotfiles.powerline
+    state: absent
+
+- name: Setup powerline configuration directory
+  file:
+    dest: /home/{{username}}/.config/powerline/themes/{{item}}
+    state: directory
+    owner: "{{username}}"
+    group: "{{username}}"
+    mode: 0775
+    recurse: true
+  loop:
+  - tmux
+  - shell
+
+- name: Setup powerline configuration files
+  file:
+    src: /home/{{username}}/.config/dot/powerline/{{item}}/default.json
+    dest: /home/{{username}}/.config/powerline/themes/{{item}}/default.json
+    state: link
+  loop:
+  - tmux
+  - shell
+
+- name: Create tmp directory
+  file:
+    name: /home/{{username}}/tmp
+    state: directory
+
+- name: trash powerlinefonts if exists
+  file:
+    name: /home/{{username}}/.config/powerlinefonts
+    state: absent
+
+- name: Cloning fonts
+  git:
+    repo: https://github.com/powerline/fonts
+    dest: ~/.config/powerlinefonts
+    depth: 1
+    accept_hostkey: true
+  register: fontCloned
+  become: false
+
+- name: Install Fonts
+  shell: ~/.config/powerlinefonts/install.sh Hack
+  args:
+    chdir: ~/.config/powerlinefonts
+  when: fontCloned is success
+  become: false
+
+- name: cleanup powerline font install
+  file:
+    name: ~/.config/powerlinefonts
+    state: absent

@@ -1,0 +1,17 @@
+- name: install crontabls.sh
+  template:
+    src: "../../files/utilities/crontabls.sh"
+    dest: /usr/bin/crontabls
+    owner: root
+    group: root
+    mode: 0775
+  become: true
+
+- name: install fzfkill.sh
+  template:
+    src: "../../files/utilities/fzfkill.sh"
+    dest: /usr/bin/fzfkill
+    owner: root
+    group: root
+    mode: 0755
+  become: true

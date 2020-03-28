@@ -1,0 +1,29 @@
+- name: install maybe to dry run scripts
+  pip:
+    name: maybe
+  become: true
+  ignore_errors: true
+
+- name: install cheat
+  pip:
+    name: cheat
+  become: true
+  ignore_errors: true
+
+- name: install howdoi
+  pip:
+    name: howdoi
+  become: true
+  ignore_errors: true
+
+- name: install glances (top graph)
+  pip:
+    name: glances
+  become: true
+  ignore_errors: true
+
+- name: install pg_activity
+  pip:
+    name: pg_activity
+  become: true
+  ignore_errors: true

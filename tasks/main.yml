@@ -1,0 +1,7 @@
+---
+- include: "dotfiles.yml"
+- include: "zsh.yml"
+- include: "neovim.yml"
+- include: "tmux.yml"
+- include: "powerline.yml"
+- include: "utilities.yml"
