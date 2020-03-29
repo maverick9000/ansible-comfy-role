@@ -68,7 +68,7 @@ In order to use this role add the following to your play
 License
 -------
 
-If you enjoy my work send me cash money $$$$
+Donate bitcoin 1PrnPBHcUDTYbGLUwkee9LSS7XA7r17xwN so I can buy a flat black 911
 
 Author Information
 ------------------
