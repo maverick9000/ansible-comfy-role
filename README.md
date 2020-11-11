@@ -38,6 +38,10 @@ Custom scripts:
 * pskill: find processes to kill using fzf
 * crontabls: list all crontabs including user crons, cron.d crons etc.
 
+Installation
+------------
+
+You can grab it over at Ansible Galaxy https://galaxy.ansible.com/maverick9000/ansible_comfy
 
 Requirements
 ------------
